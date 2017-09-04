@@ -2,25 +2,41 @@
 from __future__ import unicode_literals
 
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
+from posts.forms import PostForm
+from posts.models import Post
 
 def crear_post(request):
-	return HttpResponse('Add Post')
+	form = PostForm()
+	contexto = {
+		'form': form,
+	}
+	return render(request, 'form_post.html', contexto)
 
-def mostrar_post(request):
-	return HttpResponse('Detail Post')
+def mostrar_post(request, id=None):
+	# ins = Post.objects.get(id=1)
+	ins = get_object_or_404(Post, id=id)
+	contexto = {
+		'titulo': 'Titulo',
+		'ins': ins
+	}
+	return render(request, 'mostrar_post.html', contexto) 
 
 def listar_post(request):
-	if request.user.is_authenticated():
-		contexto = {
-			'titulo': 'JBR Account Connected ...'
-		}
-	else:
-		contexto = {
-			'titulo': 'You are not logued in your JBR ACCOUNT'
-		}
-	return render(request, 'index.html', contexto)
+	lista = Post.objects.all()
+	contexto = {
+		'lista': lista
+	}
+	# if request.user.is_authenticated():
+	# 	contexto = {
+	# 		'titulo': 'JBR Account Connected ...'
+	# 	}
+	# else:
+	# 	contexto = {
+	# 		'titulo': 'You are not logued in your JBR ACCOUNT'
+	# 	}
+	return render(request, 'listar_post.html', contexto)
 
 def actualizar_post(request):
 	return HttpResponse('Update Post')

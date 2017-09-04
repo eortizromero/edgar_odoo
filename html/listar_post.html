@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block contenido %}
+
+	<h1>{{ titulo }}</h1>
+	{% for l in lista %}
+		<p><a href="{{ l.get_absolute_url }}">{{ l.titulo }}</a></p>
+		<p>{{ l.contenido }}</p>
+		<p>{{ l.creado }}</p>
+		<p>{{ l.actualizado }}</p>
+	{% endfor %}
+{% endblock %}
