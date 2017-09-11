@@ -1,8 +1,18 @@
 {% extends "layout.html" %}
 
 {% block contenido %}
-	<form action="">
-		{{ form.as_p }}
-	<input type="submit" value="Guardar">
-	</form>
+	<div class="row">
+		<form class="col s12" method="POST" action="">
+			{% csrf_token %}
+			<div class="input-field col s12">
+				{{ form.titulo }}
+				<label for="{{ form.titulo.id_for_label }}">TÍTULO</label>
+			</div>
+			<div class="input-field col s12">
+				{{ form.contenido }}
+				<label for="{{ form.contenido.id_for_label }}">DESCRIPCIÓN</label>
+			</div>
+			<input type="submit" class="btn waves-light waves-effect green" value="Guardar">
+		</form>
+	</div>
 {% endblock %}

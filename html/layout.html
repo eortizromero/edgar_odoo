@@ -1,10 +1,20 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
 	<title>{{ titulo }}</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	<link rel="stylesheet" href="{% static 'css/materialize.min.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/circular-font.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" />
 </head>
 <body>
-	{% block contenido %}{% endblock %}
+	{% include "messages_display.html "%}
+	<div class="container">
+		{% block contenido %}{% endblock %}
+	</div>
+	<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
 </body>
 </html>

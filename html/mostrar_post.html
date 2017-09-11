@@ -1,8 +1,11 @@
 {% extends "layout.html" %}
 
+
 {% block contenido %}
 	<p>{{ ins.titulo }}</p>
 	<p>{{ ins.contenido }}</p>
 	<p>{{ ins.creado }}</p>
-	<p>{{ ins.actualizado }}</p>	
+	<p>{{ ins.actualizado }}</p>
+	<a href="/">Editar</a>
+	<a href="/eliminar">Eliminar</a>
 {% endblock %}

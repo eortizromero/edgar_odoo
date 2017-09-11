@@ -2,11 +2,34 @@
 
 {% block contenido %}
 
-	<h1>{{ titulo }}</h1>
-	{% for l in lista %}
-		<p><a href="{{ l.get_absolute_url }}">{{ l.titulo }}</a></p>
-		<p>{{ l.contenido }}</p>
-		<p>{{ l.creado }}</p>
-		<p>{{ l.actualizado }}</p>
-	{% endfor %}
+<h1>{{ titulo }}</h1>
+{% for l in lista %}
+<div class="col s12 m7">
+	<h4 class="header">{{ l.titulo|linebreaks|truncatechars:80 }}</h4>
+	<div class="card horizontal">
+		<div class="card-image">
+			<img src="https://lorempixel.com/100/190/nature/6">
+		</div>
+		<div class="card-stacked">
+			<div class="card-content">
+				<p>{{ l.contenido|linebreaks|truncatechars:120 }}</p>
+				<small>Hace {{ l.actualizado|timesince }}</small>
+			</div>
+			<div class="card-action">
+				<a href="{{ l.get_absolute_url }}">{{ l.titulo|linebreaks|truncatechars:120 }}</a>
+			</div>
+		</div>
+	</div>
+</div>
+{% endfor %}
+<ul class="pagination">
+	{% if lista.has_previous %}
+	<li class="disable"><a href="?pagina={{ lista.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+	{% endif %}
+
+	<li class="">Página {{ lista.number }} de {{ lista.paginator.num_pages }}</li>
+	{% if lista.has_next %}
+	<li class="waves-effect"><a href="?pagina={{ lista.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+	{% endif %}
+</ul>
 {% endblock %}
